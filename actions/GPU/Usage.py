@@ -30,7 +30,7 @@ class Usage(ActionBase):
         percent = round(self.get_gpu_usage())
         self.set_center_label(text=f"{percent}%", font_size=24)
         
-    def get_gpu_usage():
+    def get_gpu_usage(self):
         # Run the `rocm-smi -u -d 0` command
         result = subprocess.run(['rocm-smi', '-u', '-d', '0'], capture_output=True, text=True)
 
@@ -39,7 +39,7 @@ class Usage(ActionBase):
             # Use a regular expression to find the GPU usage percentage
             match = re.search(r'GPU use \(%\): (\d+)', result.stdout)
             if match:
-                gpu_usage = match.group(1)
+                gpu_usage = int(match.group(1))
                 return gpu_usage
             else:
                 return 0
