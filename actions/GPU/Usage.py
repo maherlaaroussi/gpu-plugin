@@ -6,6 +6,8 @@ from src.backend.PluginManager.PluginBase import PluginBase
 
 # Import python modules
 import os
+import subprocess
+import re
 
 # Import gtk modules - used for the config rows
 import gi
@@ -27,3 +29,19 @@ class Usage(ActionBase):
     def update(self):
         percent = round(100)
         self.set_center_label(text=f"{percent}%", font_size=24)
+        
+    def get_gpu_usage():
+        # Run the `rocm-smi -u -d 0` command
+        result = subprocess.run(['rocm-smi', '-u', '-d', '0'], capture_output=True, text=True)
+
+        # Check if the command was successful
+        if result.returncode == 0:
+            # Use a regular expression to find the GPU usage percentage
+            match = re.search(r'GPU use \(%\): (\d+)', result.stdout)
+            if match:
+                gpu_usage = match.group(1)
+                print(f"GPU Usage: {gpu_usage}%")
+            else:
+                print("GPU usage not found in the output.")
+        else:
+            print(f"Error running rocm-smi: {result.stderr}")
