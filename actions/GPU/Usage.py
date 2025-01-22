@@ -16,13 +16,14 @@ from gi.repository import Gtk, Adw
 class Usage(ActionBase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
-    def on_ready(self) -> None:
-        icon_path = os.path.join(self.plugin_base.PATH, "assets", "info.png")
-        self.set_media(media_path=icon_path, size=0.75)
-        
-    def on_key_down(self) -> None:
-        print("Key down")
+        self.has_configuration = False
     
-    def on_key_up(self) -> None:
-        print("Key up")
+    def on_ready(self):
+        self.update()
+        
+    def on_tick(self):
+        self.update()
+
+    def update(self):
+        percent = round(100)
+        self.set_center_label(text=f"{percent}%", font_size=24)
