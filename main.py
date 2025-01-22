@@ -4,17 +4,43 @@ from src.backend.PluginManager.ActionHolder import ActionHolder
 
 # Import actions
 from .actions.GPU.Usage import Usage
+from .actions.GPU.Temperature import Temperature
+from .actions.GPU.VRAM import VRAM
+from .actions.GPU.Power import Power
 
 class PluginTemplate(PluginBase):
     def __init__(self):
         super().__init__()
 
-        ## Register actions
         self.simple_action_holder = ActionHolder(
             plugin_base = self,
             action_base = Usage,
             action_id = "com_maherlaaroussi_gpuplugin::Usage",
             action_name = "GPU Usage",
+        )
+        self.add_action_holder(self.simple_action_holder)
+
+        self.simple_action_holder = ActionHolder(
+            plugin_base = self,
+            action_base = Temperature,
+            action_id = "com_maherlaaroussi_gpuplugin::Temperature",
+            action_name = "GPU Temperature",
+        )
+        self.add_action_holder(self.simple_action_holder)
+
+        self.simple_action_holder = ActionHolder(
+            plugin_base = self,
+            action_base = VRAM,
+            action_id = "com_maherlaaroussi_gpuplugin::VRAM",
+            action_name = "GPU VRAM",
+        )
+        self.add_action_holder(self.simple_action_holder)
+
+        self.simple_action_holder = ActionHolder(
+            plugin_base = self,
+            action_base = Power,
+            action_id = "com_maherlaaroussi_gpuplugin::Power",
+            action_name = "GPU Power",
         )
         self.add_action_holder(self.simple_action_holder)
 
