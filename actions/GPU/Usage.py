@@ -40,8 +40,8 @@ class Usage(ActionBase):
             match = re.search(r'GPU use \(%\): (\d+)', result.stdout)
             if match:
                 gpu_usage = match.group(1)
-                print(f"GPU Usage: {gpu_usage}%")
+                return gpu_usage
             else:
-                print("GPU usage not found in the output.")
+                return 0
         else:
-            print(f"Error running rocm-smi: {result.stderr}")
+            return 0
