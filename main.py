@@ -12,37 +12,37 @@ class PluginTemplate(PluginBase):
     def __init__(self):
         super().__init__()
 
-        self.simple_action_holder = ActionHolder(
+        self.gpu_usage_holder = ActionHolder(
             plugin_base = self,
             action_base = Usage,
             action_id = "com_maherlaaroussi_gpuplugin::Usage",
             action_name = "GPU Usage",
         )
-        self.add_action_holder(self.simple_action_holder)
+        self.add_action_holder(self.gpu_usage_holder)
 
-        self.simple_action_holder = ActionHolder(
+        self.gpu_temperature_holder = ActionHolder(
             plugin_base = self,
             action_base = Temperature,
             action_id = "com_maherlaaroussi_gpuplugin::Temperature",
             action_name = "GPU Temperature",
         )
-        self.add_action_holder(self.simple_action_holder)
+        self.add_action_holder(self.gpu_temperature_holder)
 
-        self.simple_action_holder = ActionHolder(
+        self.gpu_vram_holder = ActionHolder(
             plugin_base = self,
             action_base = VRAM,
             action_id = "com_maherlaaroussi_gpuplugin::VRAM",
             action_name = "GPU VRAM",
         )
-        self.add_action_holder(self.simple_action_holder)
+        self.add_action_holder(self.gpu_vram_holder)
 
-        self.simple_action_holder = ActionHolder(
+        self.gpu_power_holder = ActionHolder(
             plugin_base = self,
             action_base = Power,
             action_id = "com_maherlaaroussi_gpuplugin::Power",
             action_name = "GPU Power",
         )
-        self.add_action_holder(self.simple_action_holder)
+        self.add_action_holder(self.gpu_power_holder)
 
         # Register plugin
         self.register(
