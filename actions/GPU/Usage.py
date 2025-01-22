@@ -27,7 +27,7 @@ class Usage(ActionBase):
         self.update()
 
     def update(self):
-        percent = round(100)
+        percent = round(self.get_gpu_usage())
         self.set_center_label(text=f"{percent}%", font_size=24)
         
     def get_gpu_usage():
